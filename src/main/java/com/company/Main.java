@@ -37,9 +37,10 @@ public class Main {
 //        }};
 
         //Set<String> set1 = new HashSet<>(Arrays.asList("a", "b", "c"));
-        Set<String> set1 = new HashSet<String>(new String[] {"a", "b", "c"}));
+        Map<Integer, String> map = new HashMap<>() {{
+            put(1, "qqq");
+        }};
 
-        set1.add("q");
 
         int[] arr = {1,2,3};
         int sum = Arrays.stream(arr).sum();

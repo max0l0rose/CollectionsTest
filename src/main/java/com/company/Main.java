@@ -1,7 +1,10 @@
 package com.company;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.sql.Array;
 import java.util.*;
-import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -15,64 +18,12 @@ import java.util.stream.Stream;
 
 public class Main {
 
-    static class Wrap
-    //        implements Comparable
-    {
-        protected String value;
-
-        Wrap() {
-        }
-
-        Wrap(String s) {
-            value = s;
-        }
-
-        @Override
-        public String toString() {
-            return "Wrap{" +
-                    "value='" + value + '\'' +
-                    '}';
-        }
-
-//        @Override
-//        public int compareTo(Object o) {
-////            if (!(o instanceof Wrap)
-////                    //||
-////                    //o == null
-////                    //||
-////                    //value == null
-////            )
-////                return 0;
-//
-//            int res = Objects.compare(value, ((Wrap) o).value, String::compareTo);
-////            String v = null;
-////            if (o != null)
-////                v = ((Wrap) o).value;
-////
-////            int res2 = value.compareTo(v);
-//            System.out.printf("%s, %s = %d\r\n", value, o, res);
-//            return res;
-//        }
-
-
-        public int compareTo(Optional<Wrap> o) {
-            System.out.printf("2: %s, %s", value, o);
-            if (o == null) {
-                System.out.println();
-                return 0;
-            }
-            //int res = Objects.compare(value, o.value, String::compareTo);
-            //System.out.printf(" = %d\r\n", res);
-            return 0;
-        }
-
-    }
-
-
     static int i = 0;
     public static void main(String[] args) {
 
-//        List<Integer> intList = Arrays.asList(1, 3, 2, 6, 1, 2, 7, 8);
+        //E e = new E(); // error
+
+//        List<Integer> intList = Arrays.asList(1, 3, 2, 6, 1, 2, 7, 8, 3);
 //
 //        Map<Boolean, List<Integer>> groups = intList.stream().collect(Collectors.partitioningBy(s -> s >= 6));
 //        List<List<Integer>> subSets = new ArrayList<>(groups.values());
@@ -116,6 +67,32 @@ public class Main {
 //        }};
 
 
+
+//        List<Integer> together = Stream.of(Arrays.asList(1,2,3), Arrays.asList(11,12,13)) // Stream of List<Integer>
+//                .flatMap(q -> {
+//                    List<Integer> w = new ArrayList<>();
+//                    w.addAll(0, Arrays.asList(10,20,30));
+//                    w.addAll(0, q);
+//                    return w.stream();
+//                } ) //List::stream
+//                .map(integer -> integer + 1)
+//                .collect(Collectors.toList());
+
+        List<String> in = Arrays.asList("Qqq", "Ww", "Q", "W", "W", "Q");
+
+        List out = in.stream().distinct().collect(Collectors.toList());
+
+        Wrap v = new Wrap("Aaaaa1");
+        //v.value = "Bbbb";
+
+        Optional<Wrap> op = Optional.ofNullable(v);
+        String t = op
+                //.map(Wrap::getValue)
+                .filter(q -> q.getValue().contains("bb"))
+                .map(Wrap::getValue)//.flatMap(Wrap::getValue)
+                .orElseGet(() -> "qq");
+                //.ifPresent(a -> System.out.println(a));
+
         int[] arr = {1,2,3};
         int sum = Arrays.stream(arr).sum();
 
@@ -127,12 +104,12 @@ public class Main {
 
         List<Wrap> list = //Collections.unmodifiableSet(
                 Arrays.asList(
+                        new Wrap(),
                         new Wrap("aa"),
-                        new Wrap() {{ value = "bbb"; }},
+                        new Wrap() {{ setValue("bbb"); }},
                         null,
-                        new Wrap("eeee"),
-                        new Wrap("f"),
-                        new Wrap("ccc")
+                        //new Wrap() {{ value = "eeee" }},
+                        new Wrap("f")
                 );
         //);
 
@@ -147,9 +124,9 @@ public class Main {
 
             Optional<Wrap> m = list.stream()
 //                    .peek(a -> {
-//                        String v = (a != null && a.value != null) ? a.value.toUpperCase() : "";
-//                        list.set(i++, new Wrap(v));
-//                        list2.add(v);
+//                        String val = (a != null && a.value != null) ? a.value.toUpperCase() : "";
+//                        list.set(i++, new Wrap(val));
+//                        //list2.add(v);
 //                        //return q;
 //                    })//.max((a, b) -> a.value.compareTo(b.value));
 
@@ -230,6 +207,81 @@ public class Main {
 //        set.add(1);
 //        set.add(4);
 //        set.add(null); // ok
+
+    }
+
+
+
+    static class  Wrap implements Comparable<Wrap>//, Comparator
+    {
+        @Getter
+        @Setter
+        private String value;
+
+        Wrap() {
+        }
+
+        Wrap(String s) {
+            value = s;
+        }
+
+        @Override
+        public String toString() {
+            return "Wrap{" +
+                    "value='" + value + '\'' +
+                    '}';
+        }
+
+    //        @Override
+    //        public int compareTo(Object o) {
+    ////            if (!(o instanceof Wrap)
+    ////                    //||
+    ////                    //o == null
+    ////                    //||
+    ////                    //value == null
+    ////            )
+    ////                return 0;
+    //
+    //            int res = Objects.compare(value, ((Wrap) o).value, String::compareTo);
+    ////            String v = null;
+    ////            if (o != null)
+    ////                v = ((Wrap) o).value;
+    ////
+    ////            int res2 = value.compareTo(v);
+    //            System.out.printf("%s, %s = %d\r\n", value, o, res);
+    //            return res;
+    //        }
+
+
+    //        public int compareTo(Optional<Wrap> o) {
+    //            System.out.printf("2: %s, %s", value, o);
+    //            if (o == null) {
+    //                System.out.println();
+    //                return 0;
+    //            }
+    //            //int res = Objects.compare(value, o.value, String::compareTo);
+    //            //System.out.printf(" = %d\r\n", res);
+    //            return 0;
+    //        }
+
+
+        @Override
+        public int compareTo(Wrap o) {
+            String valIn = Optional.ofNullable(o)
+                    .map(Wrap::getValue)
+                    .orElse("");
+
+            String val = Optional.ofNullable(value)
+                    .orElse("");
+
+//            if (o == null) {
+//                System.out.println();
+//                return 0;
+//            }
+            int res = Objects.compare(val, valIn, String::compareTo);
+            System.out.printf("2: %s, %s = %d\n", value, o, res);
+            return res;
+        }
 
     }
 }

@@ -18,6 +18,16 @@ import java.util.stream.Stream;
 
 public class Main {
 
+
+    static boolean isSorted(int[] array, int length) {
+        if (array == null || length < 2)
+            return true;
+        if (array[length - 2] > array[length - 1])
+            return false;
+        return isSorted(array, length - 1);
+    }
+
+
     static int i = 0;
     public static void main(String[] args) {
 
@@ -152,39 +162,48 @@ public class Main {
 
 
         List<Byte> key1 = Collections.unmodifiableList(Arrays.asList(new Byte[] {1, 2}));
-        List<Byte> key2 = Collections.unmodifiableList(Arrays.asList(new Byte[] {1, 3}));
+        List<Byte> key2 = Collections.unmodifiableList(Arrays.asList(new Byte[] {1, 2}));
         boolean eq = key1.equals(key2);
         boolean f = key1 == key2;
-        Map<List<Byte>, String> map = new HashMap<>();
+//        Map<List<Byte>, String> map = new HashMap<>();
 
         //key1.set(0, (byte) 4);
-//        Integer key1 = 1;
-//        Integer key2 = 1;
-//        boolean f = key1.equals(key2);
-//        Map<Integer, String> map = new HashMap<>();
+        Integer key21 = 1;
+        Integer key22 = 1;
+        boolean eq2 = key21.equals(key22);
+        boolean f2 = key21 == key22;
+        //Map<Integer, String> map = new HashMap<>();
+
+
+        Integer key211 = 129;
+        Integer key221 = 129;
+        boolean eq21 = key211.equals(key221);
+        boolean f21 = key211 == key221;
+        //Map<Integer, String> map = new HashMap<>();
+
+
+        String key31 = new String("qqq1");
+        String key32 = new String("qqq1");
+        boolean eq3 = key31.equals(key32);
+        boolean f3 = key31 == key32;
+        Map<String, String> map = new HashMap<>();
 
 
 
-//        String key1 = "qqq1";
-//        String key2 = "qqq2";
-//        boolean f = key1.equals(key2);
-//        Map<String, String> map = new HashMap<>();
-
-
-
-//        byte[] key1 = {1, 2, 3};
-//        byte[] key2 = {1, 2, 3};
-//        boolean f2 = key1.equals(key2);
+        byte[] key41 = {1, 2, 3};
+        byte[] key42 = {1, 2, 3};
+        boolean eq4 = key41.equals(key42);
+        boolean f4 = key41 == key42;
 //        //key2[0] = 4;
 ////        paramsPassingTest(key1, key2);
 //
 //        Map<byte[], String> map = new HashMap<>();
-        map.put(key1, "value1");
-        map.put(key2, "value2");
+        map.put(key31, "value1");
+        map.put(key32, "value2");
 
-        String retrievedValue1 = map.get(key1);
-        String retrievedValue2 = map.get(key2);
-        String retrievedValue3 = map.get(new byte[]{1, 2, 3});
+        String retrievedValue1 = map.get(key31);
+        String retrievedValue2 = map.get(key32);
+//        String retrievedValue3 = map.get(new byte[]{1, 2, 3});
 
         //vavr();
 
@@ -192,9 +211,24 @@ public class Main {
 //        HashSet;
 //        BlockingQueue;
 
-        //List<Byte> l = Arrays.asList(new Byte[] {1, 2});
-        //java.util.List<Object> list = Collections.unmodifiableList(Arrays.asList(1, "qqq"));
+        List<Byte> list2 = Arrays.asList(new Byte[] {1, 2, null, 3});
+        list2.set(0, (byte)2);
+        list2.add((byte)3);
 
+        List list3 = Arrays.asList(1, (byte)2, 3.);
+        //l2.add(4); // unsupported ERROR!
+        java.util.List<Object> list4 = Collections.unmodifiableList(
+                List source =
+                Arrays.asList(1, "qqq", null)
+        );
+
+        List<Integer> list5 = new ArrayList<>();// {{ add(1); }};
+        list5.add(1);
+
+        boolean sorted = isSorted(
+                list2.stream().mapToInt(i->i).toArray(),
+                list2.toArray().length
+        );
 
 
 

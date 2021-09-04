@@ -186,7 +186,7 @@ public class Main {
         String key32 = new String("qqq1");
         boolean eq3 = key31.equals(key32);
         boolean f3 = key31 == key32;
-        Map<String, String> map = new HashMap<>();
+//        Map<String, String> map = new HashMap<>();
 
 
 
@@ -197,12 +197,12 @@ public class Main {
 //        //key2[0] = 4;
 ////        paramsPassingTest(key1, key2);
 //
-//        Map<byte[], String> map = new HashMap<>();
-        map.put(key31, "value1");
-        map.put(key32, "value2");
+        Map<byte[], String> map = new HashMap<>();
+        map.put(key41, "value1");
+        map.put(key42, "value2");
 
-        String retrievedValue1 = map.get(key31);
-        String retrievedValue2 = map.get(key32);
+        String retrievedValue1 = map.get(key41);
+        String retrievedValue2 = map.get(key42);
 //        String retrievedValue3 = map.get(new byte[]{1, 2, 3});
 
         //vavr();
@@ -211,19 +211,31 @@ public class Main {
 //        HashSet;
 //        BlockingQueue;
 
-        List<Byte> list2 = Arrays.asList(new Byte[] {1, 2, null, 3});
-        list2.set(0, (byte)2);
-        list2.add((byte)3);
+//        byte[] barr = {1, 3, 5};
+//        List list3 = Arrays.asList(barr); //1, (byte)2, 3. // OK
+//        barr[0] = 20; // OK! list3 = view!
+//        list3.set(0, (byte)30);
 
-        List list3 = Arrays.asList(1, (byte)2, 3.);
-        //l2.add(4); // unsupported ERROR!
-        java.util.List<Object> list4 = Collections.unmodifiableList(
-                List source =
-                Arrays.asList(1, "qqq", null)
-        );
+
+        Byte[] barr2 = {1, 3, 5};
+        List<Byte> list32 = Arrays.asList(barr2); //1, (byte)2, 3. // OK
+        barr2[0] = 20; // OK! list3 = view!
+        list32.set(0, (byte)30); // OK
+        //list32.add(0, (byte)31); // ERROR
+
+
+        List listSrc = Arrays.asList(1, "qqq", null);
+        java.util.List<Object> list4 = Collections.unmodifiableList(listSrc); //VIEW!!!!
+        listSrc.set(0, 10); // OK
+        //list4.set(0, 11); // UnsupportedOperationException
+        //listSrc.add(21); // ERROR
 
         List<Integer> list5 = new ArrayList<>();// {{ add(1); }};
         list5.add(1);
+
+        List<Byte> list2 = Arrays.asList(new Byte[] {1, 2, null, 3});
+        list2.set(0, (byte)2);
+        //list2.add((byte)3); // ERROR
 
         boolean sorted = isSorted(
                 list2.stream().mapToInt(i->i).toArray(),

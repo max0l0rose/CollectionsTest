@@ -33,6 +33,21 @@ public class Main {
 
         //E e = new E(); // error
 
+
+        HashMap<Integer, String> map0 = new HashMap<>();
+        map0.put(4, null);
+        map0.put(5, null); // ok
+        map0.put(null, "r"); // ok
+        map0.put(1, "q");
+
+        HashSet<Integer> set0 = new HashSet<>();
+        set0.add(1);
+        set0.add(1); //OK
+        set0.add(null); // ok
+        set0.add(null); // ok
+        set0.add(4);
+
+
 //        List<Integer> intList = Arrays.asList(1, 3, 2, 6, 1, 2, 7, 8, 3);
 //
 //        Map<Boolean, List<Integer>> groups = intList.stream().collect(Collectors.partitioningBy(s -> s >= 6));
@@ -242,17 +257,6 @@ public class Main {
                 list2.toArray().length
         );
 
-
-
-        //        HashMap<Integer, String> map = new HashMap<>();
-//        map.put(1, "qqq");
-//        map.put(4, null); // ok
-//        map.put(null, "rrrr"); // ok
-
-//        HashSet<Integer> set = new HashSet<>();
-//        set.add(1);
-//        set.add(4);
-//        set.add(null); // ok
 
     }
 

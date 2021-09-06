@@ -1,5 +1,6 @@
 package com.company;
 
+import com.google.common.collect.Sets;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -80,17 +81,25 @@ public class Main {
 
 
 
-//        Set<String> set = new HashSet<String>(){{
-//            add("a");
-//            add("b");
-//            add("c");
-//        }};
+        Set<String> setA = new HashSet<String>(){{
+            add("a");
+            add("b");
+            add("c");
+        }};
 
-        //Set<String> set1 = new HashSet<>(Arrays.asList("a", "b", "c"));
+        Set<String> setB = new HashSet<>(Arrays.asList("b", "c", "d"));
+
 //        Map<Integer, String> map0 = new HashMap<Integer, String>() {{
 //            put(1, "qqq");
 //        }};
 
+
+        // GUAVA
+        Set<String> intersectSet = Sets.intersection(setA, setB);
+        //assertEquals(setOf(2,4), intersectSet);
+
+        Set<String> unionSet = Sets.union(setA, setB);
+        //assertEquals(setOf(1,2,3,4,6,8), unionSet);
 
 
 //        List<Integer> together = Stream.of(Arrays.asList(1,2,3), Arrays.asList(11,12,13)) // Stream of List<Integer>
@@ -177,10 +186,10 @@ public class Main {
 
 
         List<Byte> key1 = Collections.unmodifiableList(Arrays.asList(new Byte[] {1, 2}));
-        List<Byte> key2 = Collections.unmodifiableList(Arrays.asList(new Byte[] {1, 2}));
+        List<Byte> key2 = Collections.unmodifiableList(Arrays.asList(new Byte[] {1, 22}));
         boolean eq = key1.equals(key2);
         boolean f = key1 == key2;
-//        Map<List<Byte>, String> map = new HashMap<>();
+        Map<List<Byte>, String> map = new HashMap<>();
 
         //key1.set(0, (byte) 4);
         Integer key21 = 1;
@@ -212,12 +221,13 @@ public class Main {
 //        //key2[0] = 4;
 ////        paramsPassingTest(key1, key2);
 //
-        Map<byte[], String> map = new HashMap<>();
-        map.put(key41, "value1");
-        map.put(key42, "value2");
+        //Map<byte[], String> map = new HashMap<>();
+        map.put(key1, "value1");
+        map.put(key2, "value2");
 
-        String retrievedValue1 = map.get(key41);
-        String retrievedValue2 = map.get(key42);
+        String retrievedValue1 = map.get(key1);
+        String retrievedValue2 = map.get(key2);
+        String retrievedValue22 = map.get(Collections.unmodifiableList(Arrays.asList(new Byte[] {1, 2})));
 //        String retrievedValue3 = map.get(new byte[]{1, 2, 3});
 
         //vavr();

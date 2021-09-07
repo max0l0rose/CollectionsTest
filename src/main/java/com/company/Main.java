@@ -16,8 +16,23 @@ import java.util.stream.Stream;
 //    int val;
 //}
 
+class C1<T extends Class1, R super Class2> {
+    R func1(T t) {
+        return null; // new Class3();
+    }
+}
 
 public class Main {
+
+//    static public interface Funcable<? extends T> {
+//        T func();
+//        //<E> E func2(T t, E e); // OK
+//    }
+
+
+    public static <T> void func1(T t) {
+        //Class2 c = t;
+    }
 
 
     static boolean isSorted(int[] array, int length) {
@@ -101,6 +116,25 @@ public class Main {
         Set<String> unionSet = Sets.union(setA, setB);
         //assertEquals(setOf(1,2,3,4,6,8), unionSet);
 
+
+        // PECS
+//        List<? extends Set> listSet = new ArrayList<>();
+//        listSet.add(new HashSet());
+//        //HashSet s = listSet.get(0);
+
+
+//        Funcable<Class1> r = c -> {
+//            return new Class2();
+//        };
+
+
+        func1(new Class1());
+
+        List<? extends Class1> list0 = new ArrayList<Class1>() {{
+            add(new Class1()); add(new Class2()); // WORKS here!!!!!!
+        }};
+        list0.add(new Class1()); // CONSUMER
+        Class1 q = list0.get(0); // PRODUCER
 
 //        List<Integer> together = Stream.of(Arrays.asList(1,2,3), Arrays.asList(11,12,13)) // Stream of List<Integer>
 //                .flatMap(q -> {

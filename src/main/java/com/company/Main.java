@@ -4,11 +4,9 @@ import com.google.common.collect.Sets;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 //@lombok.Getter
 //@Setter
@@ -16,11 +14,6 @@ import java.util.stream.Stream;
 //    int val;
 //}
 
-class C1<T extends Class1, R super Class2> {
-    R func1(T t) {
-        return null; // new Class3();
-    }
-}
 
 public class Main {
 
@@ -30,8 +23,9 @@ public class Main {
 //    }
 
 
-    public static <T> void func1(T t) {
+    public static <T> T func1(T t) {
         //Class2 c = t;
+        return t;
     }
 
 
@@ -42,6 +36,8 @@ public class Main {
             return false;
         return isSorted(array, length - 1);
     }
+
+
 
 
     static int i = 0;
@@ -62,6 +58,21 @@ public class Main {
         set0.add(null); // ok
         set0.add(null); // ok
         set0.add(4);
+
+
+        //List<Class0> lll = new ArrayList<Class0>();
+        List<? super Class1> lll3 = new ArrayList<Class0>();
+        //lll.add(new Class0());
+        //lll.add(new Class1<>());
+        List<? extends Class1> lll2 = new ArrayList<>(); // ?????????????????
+        lll2.add(new Class2());
+        Class1 ddd = lll2.get(0);
+        //lll2 = lll;
+        lll3 = (List<? super Class1>)lll2;
+        //lll = lll3;
+
+        List<? extends Class1> circles2 = new ArrayList<>();
+        List<? extends Class0> shapes2 = circles2; // OK
 
 
 //        List<Integer> intList = Arrays.asList(1, 3, 2, 6, 1, 2, 7, 8, 3);
@@ -117,7 +128,8 @@ public class Main {
         //assertEquals(setOf(1,2,3,4,6,8), unionSet);
 
 
-        // PECS
+        // ---PECS---
+
 //        List<? extends Set> listSet = new ArrayList<>();
 //        listSet.add(new HashSet());
 //        //HashSet s = listSet.get(0);
@@ -127,14 +139,24 @@ public class Main {
 //            return new Class2();
 //        };
 
+        C1<Class1> c1 = new C1<>();
+        c1.func2(new Class2());
+        //C1<Class2> c12 = new C1<>();
+        //c1 = c12; // ERROR!
+        Class1<Set> class1 = (Class1<Set>)c1.funcC1_2(new Class1<HashSet>());
+        List ss = (List)class1.work1_Class1((Collection)Arrays.asList(2, 3).stream().collect(Collectors.toCollection(ArrayList<Integer>::new)));
+        ss.add("qq");
+
 
         func1(new Class1());
 
-        List<? extends Class1> list0 = new ArrayList<Class1>() {{
-            add(new Class1()); add(new Class2()); // WORKS here!!!!!!
-        }};
-        list0.add(new Class1()); // CONSUMER
-        Class1 q = list0.get(0); // PRODUCER
+//        List<? extends Class1> list0 = new ArrayList<Class1>() {{
+//            add(new Class1()); add(new Class2()); // WORKS here!!!!!!
+//        }};
+//        list0.add(new Class1()); // CONSUMER
+//        Class1 q = list0.get(0); // PRODUCER
+
+
 
 //        List<Integer> together = Stream.of(Arrays.asList(1,2,3), Arrays.asList(11,12,13)) // Stream of List<Integer>
 //                .flatMap(q -> {

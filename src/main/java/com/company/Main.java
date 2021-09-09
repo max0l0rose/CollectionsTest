@@ -3,6 +3,7 @@ package com.company;
 import com.google.common.collect.Sets;
 import lombok.Getter;
 import lombok.Setter;
+import org.checkerframework.checker.nullness.Opt;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,10 +24,11 @@ public class Main {
 //    }
 
 
-    public static <T> T func1(T t) {
-        //Class2 c = t;
-        return t;
-    }
+//    public static Optional func_getOpt() {
+//        //Class2 c = t;
+//        Optional op = Optional.of(new ArrayList<>());
+//        return op;
+//    }
 
 
     static boolean isSorted(int[] array, int length) {
@@ -39,11 +41,23 @@ public class Main {
 
 
 
-
     static int i = 0;
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
         //E e = new E(); // error
+
+        Class1<C0> cla1 = new Class1(C0.class);
+        C0 c0 = cla1.produce();
+
+        //List<String>[] stringLists0 = new List<String>[1]; // comp ERROR!!!!
+        List<String>[] stringLists0 = new List[1]; // OK !!!!!!!!!!!
+        String[] stringLists = new String[1]; // OK
+        String[] stringLists2 = {"q"}; // OK
+        int[] iarr = {1, 2}; // OK
+        Class0[] carr = new Class0[2]; // OK
+        //Class1<I0>[] carr2 = new Class1<I0>[2]; // ERROR!!!
+        Class1<I0>[] carr21 = new Class1[2]; // OK!!!!
+
+        //Optional op = func_getOpt(new HashSet<>());
 
 
         HashMap<Integer, String> map0 = new HashMap<>();
@@ -60,19 +74,21 @@ public class Main {
         set0.add(4);
 
 
-        //List<Class0> lll = new ArrayList<Class0>();
-        List<? super Class1> lll3 = new ArrayList<Class0>();
-        //lll.add(new Class0());
-        //lll.add(new Class1<>());
-        List<? extends Class1> lll2 = new ArrayList<>(); // ?????????????????
-        lll2.add(new Class2());
-        Class1 ddd = lll2.get(0);
-        //lll2 = lll;
-        lll3 = (List<? super Class1>)lll2;
-        //lll = lll3;
+//        //List<Class0> lll = new ArrayList<Class0>();
+//        List<? super Class1> lll3 = new ArrayList<Class0>();
+//        //lll.add(new Class0());
+//        //lll.add(new Class1<>());
+//        List<? extends Class1> lll2 = new ArrayList<>(); // ?????????????????
+//        lll2.add(new Class2());
+//        Class1 ddd = lll2.get(0);
+//        //lll2 = lll;
+//        lll3 = (List<? super Class1>)lll2;
+//        //lll = lll3;
+//
+//        List<? extends Class1> circles2 = new ArrayList<>();
+//        List<? extends Class0> shapes2 = circles2; // OK
+//        circles2 = (List<? extends Class1>)shapes2; // OK
 
-        List<? extends Class1> circles2 = new ArrayList<>();
-        List<? extends Class0> shapes2 = circles2; // OK
 
 
 //        List<Integer> intList = Arrays.asList(1, 3, 2, 6, 1, 2, 7, 8, 3);
@@ -139,22 +155,28 @@ public class Main {
 //            return new Class2();
 //        };
 
-        C1<Class1> c1 = new C1<>();
-        c1.func2(new Class2());
-        //C1<Class2> c12 = new C1<>();
-        //c1 = c12; // ERROR!
-        Class1<Set> class1 = (Class1<Set>)c1.funcC1_2(new Class1<HashSet>());
-        List ss = (List)class1.work1_Class1((Collection)Arrays.asList(2, 3).stream().collect(Collectors.toCollection(ArrayList<Integer>::new)));
-        ss.add("qq");
-
-
-        func1(new Class1());
-
-//        List<? extends Class1> list0 = new ArrayList<Class1>() {{
+//        ArrayList<? extends Class0> arrl = new ArrayList() {{
 //            add(new Class1()); add(new Class2()); // WORKS here!!!!!!
 //        }};
-//        list0.add(new Class1()); // CONSUMER
-//        Class1 q = list0.get(0); // PRODUCER
+        //arrl.add(new Class3());
+
+//        List<? extends Class1> list0 = arrl;
+        //Class0 ell = arrl.get(0);
+//        //list0.add(new Class1()); // CONSUMER // ERROR
+////        Class1 q = list0.get(0); // PRODUCER
+
+
+
+        GreenCollection greenCollection = new GreenCollection<>();
+        Class1<? extends Set> class1 = greenCollection.func2(new HSI() {{ add(1); add(2); }});
+//        //C1<Class2> c12 = new C1<>();
+//        //c1 = c12; // ERROR!
+//        List ss = (List)class1.work1_Class1(
+//                Arrays.asList(2, 3).stream().collect(Collectors.toCollection(ArrayList::new))
+//        );
+//        ss.add("qq");
+
+
 
 
 

@@ -45,17 +45,35 @@ public class Main {
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
         //E e = new E(); // error
 
+        // LOOL!!! TYPE ERASURE
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add("qqq");
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(1);
+        //arrayList = strings; // Ok
+        strings = arrayList; // Unchecked assignment
+        strings.add("www");
+        arrayList.add(2);
+
+
         Class1<C0> cla1 = new Class1(C0.class);
         C0 c0 = cla1.produce();
+
 
         //List<String>[] stringLists0 = new List<String>[1]; // comp ERROR!!!!
         List<String>[] stringLists0 = new List[1]; // OK !!!!!!!!!!!
         String[] stringLists = new String[1]; // OK
         String[] stringLists2 = {"q"}; // OK
-        int[] iarr = {1, 2}; // OK
+        int[] ints = {1, 2}; // OK
+        //Object[] oarr = (Object[])ints; // ERROR
+            Integer[] integers = {1, 2}; // OK
+            Object[] oarr = integers;
         Class0[] carr = new Class0[2]; // OK
         //Class1<I0>[] carr2 = new Class1<I0>[2]; // ERROR!!!
-        Class1<I0>[] carr21 = new Class1[2]; // OK!!!!
+        Class1<I0>[] carr21 = new Class1[2]; // ERROR
+        Class1[] carr22 = { new Class1() }; // OK
+
+        oarr = carr22; // OK
 
         //Optional op = func_getOpt(new HashSet<>());
 
@@ -75,12 +93,29 @@ public class Main {
 
 
 //        //List<Class0> lll = new ArrayList<Class0>();
-//        List<? super Class1> lll3 = new ArrayList<Class0>();
-//        //lll.add(new Class0());
-//        //lll.add(new Class1<>());
-//        List<? extends Class1> lll2 = new ArrayList<>(); // ?????????????????
-//        lll2.add(new Class2());
-//        Class1 ddd = lll2.get(0);
+        List<? super Class1> lll3 = new ArrayList<Class1>() {{
+            //add(new Class0()); // ERROR
+            add(new Class1()); // OK
+            add(new Class2()); // OK
+            //add(new Class3()); // OK
+        }};
+        lll3.add(new Class1()); // OK
+        lll3.add(new Class2()); // OK
+        lll3.add(null); // OK
+        Class1 ccc1 = (Class1)lll3.get(0);
+
+        //lll.add(new Class0());
+        //lll.add(new Class1<>());
+        List<? extends Class1> lll2 = new ArrayList<Class2>() {{
+            //add(new Class1()); // ERROR
+            add(new Class2()); // OK
+            add(new Class3()); // OK
+        }};
+        //lll2.add(new Class0()); // ERROR
+        //lll2.add(new Class1()); // ERROR
+        //lll2.add(new Class2()); // ERROR
+        lll2.add(null); // OK
+        Class1 ddd = lll2.get(0);
 //        //lll2 = lll;
 //        lll3 = (List<? super Class1>)lll2;
 //        //lll = lll3;

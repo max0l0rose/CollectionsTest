@@ -19,7 +19,16 @@ public class Class0<T> {
 
 class Class1<T extends I0> extends Class0 {
 
+	//Field.getGenericType() // Reflection
+
 	private Class<T> typeParameterClass;
+
+	private int a;
+
+	public Class1()
+	{
+		a = 2;
+	}
 
 	Class1(Class<T> typeParameterClass) {
 		this.typeParameterClass = typeParameterClass;
@@ -42,6 +51,10 @@ class Class1<T extends I0> extends Class0 {
 
 class Class2<E, R> extends Class1 {
 
+	public Class2()
+	{
+	}
+
 	public Class2(Class typeParameterClass) {
 		super(typeParameterClass);
 	}
@@ -53,6 +66,9 @@ class Class2<E, R> extends Class1 {
 
 
 class Class3 extends Class2 {
+
+	public Class3() {
+	}
 
 	public Class3(Class typeParameterClass) {
 		super(typeParameterClass);

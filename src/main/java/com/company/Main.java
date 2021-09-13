@@ -8,6 +8,7 @@ import org.checkerframework.checker.nullness.Opt;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 //@lombok.Getter
 //@Setter
@@ -166,12 +167,16 @@ public class Main {
 
         Set<String> setB = new HashSet<>(Arrays.asList("b", "c", "d"));
 
-//        Map<Integer, String> map0 = new HashMap<Integer, String>() {{
-//            put(1, "qqq");
-//        }};
+        Map<Integer, String> map0 = new HashMap<Integer, String>() {{
+            put(1, "qqq");
+        }};
+
+        map0.merge(9, "val9", (value, newValue) -> value.concat(newValue));
+        map0.get(9);             // val9
 
 
         // GUAVA
+
         Set<String> intersectSet = Sets.intersection(setA, setB);
         //assertEquals(setOf(2,4), intersectSet);
 
@@ -213,28 +218,31 @@ public class Main {
 
 
 
+        List<Integer> together = Stream.of(Arrays.asList(1,2,3), Arrays.asList(11,12,13)) // Stream of List<Integer>
+                .flatMap(q -> {
+                    List<Integer> w = new ArrayList<>();
+                    w.addAll(0, Arrays.asList(10,20,30));
+                    w.addAll(0, q);
+                    return w.stream();
+                } ) //List::stream
+                .map(integer -> integer + 1)
+                .collect(Collectors.toList());
 
+        boolean allStartsWithA = together.stream()
+                //.anyMatch((s) -> s > 10);
+                .noneMatch((s) -> s > 20);
+                //.allMatch((s) -> s > 10);
 
-//        List<Integer> together = Stream.of(Arrays.asList(1,2,3), Arrays.asList(11,12,13)) // Stream of List<Integer>
-//                .flatMap(q -> {
-//                    List<Integer> w = new ArrayList<>();
-//                    w.addAll(0, Arrays.asList(10,20,30));
-//                    w.addAll(0, q);
-//                    return w.stream();
-//                } ) //List::stream
-//                .map(integer -> integer + 1)
-//                .collect(Collectors.toList());
 
         List<String> in = Arrays.asList("Qqq", "Ww", "Q", "W", "W", "Q");
 
         List out = in.stream().distinct().collect(Collectors.toList());
 
-        Wrap v = new Wrap("Aaaaa1");
+        Wrap v = new Wrap("Aabba1");
         //v.value = "Bbbb";
 
         Optional<Wrap> op = Optional.ofNullable(v);
         String t = op
-                //.map(Wrap::getValue)
                 .filter(q -> q.getValue().contains("bb"))
                 .map(Wrap::getValue)//.flatMap(Wrap::getValue)
                 .orElseGet(() -> "qq");

@@ -41,6 +41,23 @@ public class Main {
     }
 
 
+    int producer(List<? extends Class1> list) {
+        Class1 c = list.get(0);
+        list.add(null);
+        //list.add(new Object()); // ERROR
+//        list.add(new Class0()); // ERROR
+//        list.add(new Class1()); // ERROR
+//        list.add(new Class2()); // ERROR
+        return c.hashCode();
+    }
+
+    void consumer(List<? super Class1> list) {
+        list.add(null);
+        //list.add(new Object()); // ERROR
+        //list.add(new Class0()); // ERROR
+        list.add(new Class1());
+        list.add(new Class2());
+    }
 
     static int i = 0;
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
@@ -102,6 +119,7 @@ public class Main {
         }};
         lll3.add(new Class1()); // OK
         lll3.add(new Class2()); // OK
+        //lll3.add(new Class0()); // ERROR
         lll3.add(null); // OK
         Class1 ccc1 = (Class1)lll3.get(0);
 

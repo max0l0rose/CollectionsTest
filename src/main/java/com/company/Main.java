@@ -59,8 +59,30 @@ public class Main {
         list.add(new Class2());
     }
 
+
+
+
     static int i = 0;
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+
+        LinkedHashMap;
+        TreeMap; // NOT HASH
+
+        HashMap<Integer, String> map0 = new HashMap<>();
+        map0.put(4, null);
+        map0.put(5, null); // ok
+        map0.put(null, "r"); // ok
+        map0.put(1, "q");
+
+        HashSet<Integer> set0 = new HashSet<>();
+        set0.add(1);
+        set0.add(1); //OK
+        set0.add(null); // ok
+        set0.add(null); // ok
+        set0.add(4);
+
+
+
         //E e = new E(); // error
 
         // LOOL!!! TYPE ERASURE
@@ -94,20 +116,6 @@ public class Main {
         oarr = carr22; // OK
 
         //Optional op = func_getOpt(new HashSet<>());
-
-
-        HashMap<Integer, String> map0 = new HashMap<>();
-        map0.put(4, null);
-        map0.put(5, null); // ok
-        map0.put(null, "r"); // ok
-        map0.put(1, "q");
-
-        HashSet<Integer> set0 = new HashSet<>();
-        set0.add(1);
-        set0.add(1); //OK
-        set0.add(null); // ok
-        set0.add(null); // ok
-        set0.add(4);
 
 
 //        //List<Class0> lll = new ArrayList<Class0>();

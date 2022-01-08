@@ -5,6 +5,12 @@ import java.util.*;
 
 public class Class0<T> {
 
+	int val;
+
+	public Class0(int val) {
+		this.val = val;
+	}
+
 	public <T> T work() {
 		return null;
 	}
@@ -25,9 +31,10 @@ class Class1<T extends I0> extends Class0 {
 
 	private int a;
 
-	public Class1()
+	public Class1(int val)
 	{
-		a = 2;
+		super(val);
+		a = val;
 	}
 
 	Class1(Class<T> typeParameterClass) {

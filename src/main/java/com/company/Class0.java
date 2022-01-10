@@ -1,8 +1,11 @@
 package com.company;
 
+import lombok.NoArgsConstructor;
+
 import java.util.*;
 
 
+@NoArgsConstructor
 public class Class0<T> {
 
 	int val;
@@ -22,7 +25,7 @@ public class Class0<T> {
 }
 
 
-
+@NoArgsConstructor
 class Class1<T extends I0> extends Class0 {
 
 	//Field.getGenericType() // Reflection

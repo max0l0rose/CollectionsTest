@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.checkerframework.checker.nullness.Opt;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -65,8 +66,22 @@ public class Main {
     static int i = 0;
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 
-        LinkedHashMap;
-        TreeMap; // NOT HASH
+        LinkedHashMap<Integer, String[]> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put(1, new String[]{"aaa"});
+        String sss = linkedHashMap.toString();
+        linkedHashMap.put(2, new String[]{"bbbbb"});
+        linkedHashMap.put(2, new String[]{"ccccccc"});
+
+        String[] qqq = linkedHashMap.get(2);
+
+        linkedHashMap.merge(2, new String[]{"cccccc"},
+                (a, b) -> Stream.concat(Arrays.stream(a), Arrays.stream(b)).toArray(size -> new String[size])
+        );
+
+//        TreeMap; // NOT HASH
+//        IdentityHashMap;
+//        EnumMap;
+//        ConcurrentHashMap;
 
         HashMap<Integer, String> map0 = new HashMap<>();
         map0.put(4, null);
@@ -193,7 +208,7 @@ public class Main {
 
         Set<String> setB = new HashSet<>(Arrays.asList("b", "c", "d"));
 
-        Map<Integer, String> map0 = new HashMap<Integer, String>() {{
+        Map<Integer, String> map2 = new HashMap<Integer, String>() {{
             put(1, "qqq");
         }};
 

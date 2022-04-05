@@ -66,9 +66,16 @@ public class Main {
     static int i = 0;
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 
+        TreeSet treeSet = new TreeSet<>(); // Objects must be comparable!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        treeSet.add(new Simply());
+        treeSet.add(new Simply());
+        treeSet.add(1);
+        treeSet.add(new Object());
+
+
         LinkedHashMap<Integer, String[]> linkedHashMap = new LinkedHashMap<>();
         linkedHashMap.put(1, new String[]{"aaa"});
-        String sss = linkedHashMap.toString();
+        //String sss = linkedHashMap.toString();
         linkedHashMap.put(2, new String[]{"bbbbb"});
         linkedHashMap.put(2, new String[]{"ccccccc"});
 
@@ -79,14 +86,26 @@ public class Main {
         );
 
 //        TreeMap; // NOT HASH
-//        IdentityHashMap;
-//        EnumMap;
+////        IdentityHashMap;
+////        EnumMap;
 //        ConcurrentHashMap;
+//        ConcurrentLinkedHashMap;
+
+        HashMap<Simply, String> map001 = new HashMap<>(); // Object is not required to implement smth!
+        map001.put(new Simply(), null);
+        map001.put(new Simply(), null);
+        map001.put(new Simply(), null); // ok
+        map001.put(null, "r"); // ok
+        map001.put(null, "r2"); // ok
+        //map0.put(1, "q");
+
+
 
         HashMap<Integer, String> map0 = new HashMap<>();
         map0.put(4, null);
         map0.put(5, null); // ok
         map0.put(null, "r"); // ok
+        map0.put(null, "r2"); // ok
         map0.put(1, "q");
 
         HashSet<Integer> set0 = new HashSet<>();

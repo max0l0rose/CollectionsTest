@@ -8,8 +8,6 @@ class C0
 		implements I0 {
 }
 
-public class C1
-		extends C0
-		implements I1 {
+public class C1 extends C0 implements I1 {
 }
 
